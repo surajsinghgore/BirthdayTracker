@@ -1,23 +1,105 @@
+<?php
+$alert = false;
+$status = "alert-success";
+$mainMessage = "Error";
+$message = "This is a success alert—check it out!";
+// The request is using the POST method
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+   
+    // handle user data
+
+    $email = $_REQUEST['email'];
+    $passwords = $_REQUEST['passwords'];
+   
+
+ 
+    if ((is_null($email)) || (is_null($passwords))) {
+
+        $alert = true;
+        $mainMessage = "Warning !";
+        $status = "alert-warning";
+        $message = "Please Fill All the Fields Properly ";
+    }
+    
+     
+        // check whether user already registered or not 
+
+        require('./database/connection.php');
+        $resultGet = mysqli_query($connection,"SELECT * FROM users where email='$email'");
+        $rows = mysqli_num_rows($resultGet);
+        $datas = mysqli_fetch_assoc($resultGet);
+if($rows>0){
+
+  
+    if(password_verify($passwords, $datas['password'])){
+    $alert = true;
+    $mainMessage = "Success !";
+    $status = "alert-success";
+    $message = "User Login SuccessFully ";
+    $_REQUEST['email']="";
+     $_REQUEST['passwords']="";
+   }
+//    password not correct
+  else{
+
+    $alert = true;
+    $mainMessage = "Warning !";
+    $status = "alert-warning";
+    $message = "Password Not Correct";
+  }
+  
+   
+//    user not exits
+}else{
+
+    
+
+   $alert = true;
+   $mainMessage = "Duplicate account Warning !";
+   $status = "alert-warning";
+   $message = "Account Not Exits with this Email";
+
+  $_REQUEST['email']="";
+}
+    mysqli_close($connection);
+   
+
+$rows=null;
+
+       
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <?php require('./components/HeadTag.php');?>
 
 <body>
-
+<?php if ($alert) {
+        echo "<div class=\"alert $status alert-dismissible fade show\" role=\"alert\">
+  <strong>$mainMessage</strong> $message
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>";
+    } ?>
 <div class="container w-50 p-3 mt-5 shadow p-3 mb-5 bg-white rounded pt-5">
     
 
-<form>
+<form action="Login.php" method="POST">
   <!-- Email input -->
   <div class="form-outline mb-4">
       <label class="form-label" for="form2Example1">Email address</label>
-    <input type="email" id="form2Example1" class="form-control" />
+    <input type="email" id="form2Example1" class="form-control" name="email" required maxlength="40" value="<?php if(isset($_REQUEST['email'])){echo $_REQUEST['email'];}?>" />
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
       <label class="form-label" for="form2Example2">Password</label>
-    <input type="password" id="form2Example2" class="form-control" />
+    <input type="password" id="form2Example2" class="form-control" name="passwords" required maxlength="30" />
   </div>
 
   <!-- 2 column grid layout for inline styling -->
@@ -37,8 +119,7 @@
   </div>
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-
+  <input type="submit" value="Sign in" class="btn btn-primary btn-block mb-4" />
   <!-- Register buttons -->
   <div class="text-center">
     <p>Not have account? <a href="/birthdayTracker/Signup.php">Register</a></p>
@@ -63,9 +144,6 @@
 </div>
 
     
-
-<!-- bootstrap js  -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/191eddfbf2.js" crossorigin="anonymous"></script>
+<?php require('./components/BootstrapJavascript.php'); ?>
 </body>
 </html>

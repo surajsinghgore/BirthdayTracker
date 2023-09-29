@@ -44,13 +44,13 @@ if($rows>0){
    
 }else{
 
-    $encodePassword=password_hash($passwords, PASSWORD_BCRYPT);
+    $encodePassword=password_hash($_REQUEST['passwords'], PASSWORD_BCRYPT);
     $insertQuery="INSERT INTO users (username,email,password) VALUES ('$usernames','$email', '$encodePassword')";
     $resultGet = mysqli_query($connection,$insertQuery);
     $alert = true;
     $mainMessage = "Account Created !";
     $status = "alert-success";
-    $message = "$password Account Registered SuccessFully ";
+    $message = " Account Registered SuccessFully ";
     $_REQUEST['usernames']="";
     $_REQUEST['email']="";
      $_REQUEST['passwords']="";
