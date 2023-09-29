@@ -44,8 +44,8 @@ if($rows>0){
    
 }else{
 
-
-    $insertQuery="INSERT INTO users (username,email,password) VALUES ('$usernames','$email', '$passwords')";
+    $encodePassword=password_hash($passwords, PASSWORD_BCRYPT);
+    $insertQuery="INSERT INTO users (username,email,password) VALUES ('$usernames','$email', '$encodePassword')";
     $resultGet = mysqli_query($connection,$insertQuery);
     $alert = true;
     $mainMessage = "Account Created !";
@@ -63,12 +63,7 @@ $rows=null;
 
        
     }
-} else {
-    $alert = true;
-    $mainMessage = "Server Error !";
-    $status = "alert-danger";
-    $message = "Only Post Request Is Allowed ! ";
-}
+} 
 
 ?>
 
