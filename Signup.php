@@ -7,19 +7,20 @@ $message = "This is a success alert—check it out!";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
     // handle user data
-    $username = $_REQUEST['username'];
+    $usernames = $_REQUEST['usernames'];
     $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
+    $passwords = $_REQUEST['passwords'];
     $confirm_password = $_REQUEST['confirm_password'];
     // check null values error
-    if (($username == "") || ($email == "") || ($password == "") || ($confirm_password == "")) {
+ 
+    if ((is_null($usernames)) || (is_null($email)) || (is_null($passwords)) || (is_null($confirm_password))) {
 
         $alert = true;
         $mainMessage = "Warning !";
         $status = "alert-warning";
         $message = "Please Fill All the Fields Properly ";
     }
-     if(($password!=$confirm_password)){
+     if(($passwords!=$confirm_password)){
         $alert = true;
         $mainMessage = "Warning !";
         $status = "alert-warning";
@@ -33,24 +34,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $rows = mysqli_num_rows($resultGet);
 
 if($rows>0){
+
     $alert = true;
     $mainMessage = "Duplicate account Warning !";
     $status = "alert-warning";
     $message = "User Already Exits With this Email";
-
+    $_REQUEST['email']="";
+   
+   
 }else{
-$insertQuery="INSERT INTO `users` ( `username`, `email`, `password`) VALUES ( '$username', '$email', '$password')";
-$resultGet = mysqli_query($connection,$insertQuery);
-$alert = true;
-$mainMessage = "Account Created !";
-$status = "alert-success";
-$message = "Account Registered SuccessFully ";
- $_REQUEST['username']=" ";
- $_REQUEST['email']=" ";
- $_REQUEST['password']=" ";
- $_REQUEST['confirm_password']=" ";
-}
 
+
+    $insertQuery="INSERT INTO users (username,email,password) VALUES ('$usernames','$email', '$passwords')";
+    $resultGet = mysqli_query($connection,$insertQuery);
+    $alert = true;
+    $mainMessage = "Account Created !";
+    $status = "alert-success";
+    $message = "$password Account Registered SuccessFully ";
+    $_REQUEST['usernames']="";
+    $_REQUEST['email']="";
+     $_REQUEST['passwords']="";
+   $_REQUEST['confirm_password']="";
+}
+    mysqli_close($connection);
+   
+
+$rows=null;
 
        
     }
@@ -60,6 +69,7 @@ $message = "Account Registered SuccessFully ";
     $status = "alert-danger";
     $message = "Only Post Request Is Allowed ! ";
 }
+
 ?>
 
 
@@ -84,7 +94,7 @@ $message = "Account Registered SuccessFully ";
             <!-- name input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form2Example1">User Name</label>
-                <input type="text" id="form2Example1" class="form-control" maxlength="30" name="username" required value="<?php if(isset($_REQUEST['username'])){echo $_REQUEST['username'];}?>" />
+                <input type="text" id="form2Example1" class="form-control" maxlength="30" name="usernames" required value="<?php if(isset($_REQUEST['username'])){echo $_REQUEST['username'];}?>" />
             </div>
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -95,7 +105,7 @@ $message = "Account Registered SuccessFully ";
             <!-- Password input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form2Example3">Password</label>
-                <input type="password" id="form2Example3" maxlength="30" class="form-control" name="password" required />
+                <input type="password" id="form2Example3" maxlength="30" class="form-control" name="passwords" required />
             </div>
 
             <!-- Confirm Password input -->
