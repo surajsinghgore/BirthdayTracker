@@ -30,14 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $datas = mysqli_fetch_assoc($resultGet);
   if ($rows > 0) {
 
-// verify password
+    // verify password
     if (password_verify($password, $datas['password'])) {
       // login success
-// session created
+      // session created
       session_start();
-$_SESSION['activeUserId']=$datas['id'];
-$_SESSION['activeUserEmail']=$datas['email'];
-
+      $_SESSION['activeUserId'] = $datas['id'];
+      $_SESSION['activeUserEmail'] = $datas['email'];
+      $_SESSION['activeUserDob'] = $datas['dob'];
+echo  gettype($datas['dob']);
 
       $alert = true;
       $mainMessage = "Success !";
