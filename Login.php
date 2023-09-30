@@ -9,11 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // handle user data
 
     $email = $_REQUEST['email'];
-    $passwords = $_REQUEST['passwords'];
+    $password = $_REQUEST['password'];
    
 
  
-    if ((is_null($email)) || (is_null($passwords))) {
+    if ((is_null($email)) || (is_null($password))) {
 
         $alert = true;
         $mainMessage = "Warning !";
@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($rows>0){
 
   
-    if(password_verify($passwords, $datas['password'])){
+    if(password_verify($password, $datas['password'])){
     $alert = true;
     $mainMessage = "Success !";
     $status = "alert-success";
     $message = "User Login SuccessFully ";
     $_REQUEST['email']="";
-     $_REQUEST['passwords']="";
+     $_REQUEST['password']="";
    }
 //    password not correct
   else{
@@ -99,7 +99,7 @@ $rows=null;
   <!-- Password input -->
   <div class="form-outline mb-4">
       <label class="form-label" for="form2Example2">Password</label>
-    <input type="password" id="form2Example2" class="form-control" name="passwords" required maxlength="30" />
+    <input type="password" id="form2Example2" class="form-control" name="password" required maxlength="30" />
   </div>
 
   <!-- 2 column grid layout for inline styling -->
@@ -122,7 +122,7 @@ $rows=null;
   <input type="submit" value="Sign in" class="btn btn-primary btn-block mb-4" />
   <!-- Register buttons -->
   <div class="text-center">
-    <p>Not have account? <a href="/birthdayTracker/Signup.php">Register</a></p>
+    <p>Not have account? <a href="/Signup.php">Register</a></p>
     <p>or sign up with:</p>
     <button type="button" class="btn btn-link btn-floating mx-1">
       <i class="fab fa-facebook-f"></i>

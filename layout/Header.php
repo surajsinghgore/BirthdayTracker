@@ -29,9 +29,9 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2"><a href="/birthdayTracker/Login.php" class="text-reset text-decoration-none">Login</a></button>
-          <button type="button" class="btn btn-outline-light me-2"><a href="/birthdayTracker/Signup.php" class="text-reset text-decoration-none">Sign-Up</a></button>
-          <button type="button" class="btn btn-outline-light me-2"><a href="/birthdayTracker/Login.php" class="text-reset text-decoration-none">Logout</a></button>
+          <button type="button" class="btn btn-outline-light me-2"><a href="/Login.php" class="text-reset text-decoration-none">Login</a></button>
+          <button type="button" class="btn btn-outline-light me-2"><a href="/Signup.php" class="text-reset text-decoration-none">Sign-Up</a></button>
+          <button type="button" class="btn btn-outline-light me-2"><a href="/Login.php" class="text-reset text-decoration-none">Logout</a></button>
         </div>
       </div>
     </div>

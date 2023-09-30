@@ -7,20 +7,20 @@ $message = "This is a success alert—check it out!";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
     // handle user data
-    $usernames = $_REQUEST['usernames'];
+    $username = $_REQUEST['username'];
     $email = $_REQUEST['email'];
-    $passwords = $_REQUEST['passwords'];
+    $password = $_REQUEST['password'];
     $confirm_password = $_REQUEST['confirm_password'];
     // check null values error
  
-    if ((is_null($usernames)) || (is_null($email)) || (is_null($passwords)) || (is_null($confirm_password))) {
+    if ((is_null($username)) || (is_null($email)) || (is_null($password)) || (is_null($confirm_password))) {
 
         $alert = true;
         $mainMessage = "Warning !";
         $status = "alert-warning";
         $message = "Please Fill All the Fields Properly ";
     }
-     if(($passwords!=$confirm_password)){
+     if(($password!=$confirm_password)){
         $alert = true;
         $mainMessage = "Warning !";
         $status = "alert-warning";
@@ -44,16 +44,16 @@ if($rows>0){
    
 }else{
 
-    $encodePassword=password_hash($_REQUEST['passwords'], PASSWORD_BCRYPT);
-    $insertQuery="INSERT INTO users (username,email,password) VALUES ('$usernames','$email', '$encodePassword')";
+    $encodePassword=password_hash($_REQUEST['password'], PASSWORD_BCRYPT);
+    $insertQuery="INSERT INTO users (username,email,password) VALUES ('$username','$email', '$encodePassword')";
     $resultGet = mysqli_query($connection,$insertQuery);
     $alert = true;
     $mainMessage = "Account Created !";
     $status = "alert-success";
     $message = " Account Registered SuccessFully ";
-    $_REQUEST['usernames']="";
+    $_REQUEST['username']="";
     $_REQUEST['email']="";
-     $_REQUEST['passwords']="";
+     $_REQUEST['password']="";
    $_REQUEST['confirm_password']="";
 }
     mysqli_close($connection);
@@ -89,7 +89,7 @@ $rows=null;
             <!-- name input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form2Example1">User Name</label>
-                <input type="text" id="form2Example1" class="form-control" maxlength="30" name="usernames" required value="<?php if(isset($_REQUEST['username'])){echo $_REQUEST['username'];}?>" />
+                <input type="text" id="form2Example1" class="form-control" maxlength="30" name="username" required value="<?php if(isset($_REQUEST['username'])){echo $_REQUEST['username'];}?>" />
             </div>
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -100,7 +100,7 @@ $rows=null;
             <!-- Password input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form2Example3">Password</label>
-                <input type="password" id="form2Example3" maxlength="30" class="form-control" name="passwords" required />
+                <input type="password" id="form2Example3" maxlength="30" class="form-control" name="password" required />
             </div>
 
             <!-- Confirm Password input -->
@@ -115,7 +115,7 @@ $rows=null;
 
             <!-- Register buttons -->
             <div class="text-center">
-                <p>already have account? <a href="/birthdayTracker/Login.php">Login</a></p>
+                <p>already have account? <a href="/Login.php">Login</a></p>
                 <p>or sign up with:</p>
                 <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fab fa-facebook-f"></i>
