@@ -6,8 +6,8 @@
 
 <!-- require header -->
 <?php require('./layout/Header.php');?>
-
-
+<!-- middleware require -->
+<?php require('./middleware/verifyLogin.php'); ?>
 
 
 <!-- bootstrap js  -->
