@@ -4,7 +4,7 @@ $status = "alert-success";
 $mainMessage = "Error";
 $message = "This is a success alert—check it out!";
 // The request is using the POST method
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // handle user data
 
