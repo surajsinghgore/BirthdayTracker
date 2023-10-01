@@ -132,7 +132,7 @@ echo  gettype($datas['dob']);
       <input type="submit" value="Sign in" class="btn btn-primary btn-block mb-4" />
       <!-- Register buttons -->
       <div class="text-center">
-        <p>Not have account? <a href="/Signup.php">Register</a></p>
+        <p>Not have account? <a href="/birthdayTracker/Signup.php">Register</a></p>
         <p>or sign up with:</p>
         <button type="button" class="btn btn-link btn-floating mx-1">
           <i class="fab fa-facebook-f"></i>

@@ -33,13 +33,13 @@
           // user is login
           session_start();
           if ($_SESSION['activeUserId']) {
-            echo " <button type=\"button\" class=\"btn btn-outline-light me-2\"><a href=\"/Logout.php\" class=\"text-reset text-decoration-none\">Logout</a></button>";
+            echo " <button type=\"button\" class=\"btn btn-outline-light me-2\"><a href=\"/birthdayTracker/Logout.php\" class=\"text-reset text-decoration-none\">Logout</a></button>";
           }
           // user not login
           else {
 
-            echo " <button type=\"button\" class=\"btn btn-outline-light me-2\"><a href=\"/Login.php\" class=\"text-reset text-decoration-none\">Login</a></button>
-            <button type=\"button\" class=\"btn btn-outline-light me-2\"><a href=\"/Signup.php\" class=\"text-reset text-decoration-none\">Sign-Up</a></button>";
+            echo " <button type=\"button\" class=\"btn btn-outline-light me-2\"><a href=\"/birthdayTracker/Login.php\" class=\"text-reset text-decoration-none\">Login</a></button>
+            <button type=\"button\" class=\"btn btn-outline-light me-2\"><a href=\"/birthdayTracker/Signup.php\" class=\"text-reset text-decoration-none\">Sign-Up</a></button>";
           }
          
           ?>

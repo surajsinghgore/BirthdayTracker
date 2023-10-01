@@ -115,7 +115,7 @@ $rows=null;
 
             <!-- Register buttons -->
             <div class="text-center">
-                <p>already have account? <a href="/Login.php">Login</a></p>
+                <p>already have account? <a href="/birthdayTracker/Login.php">Login</a></p>
                 <p>or sign up with:</p>
                 <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fab fa-facebook-f"></i>
