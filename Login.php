@@ -155,6 +155,12 @@ echo  gettype($datas['dob']);
 
 
   <?php require('./components/BootstrapJavascript.php'); ?>
+  <!-- prevent page from re-submit data on page refresh -->
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
 </body>
 
 </html>

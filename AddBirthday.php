@@ -1,3 +1,5 @@
+
+
 <?php
 $alert = false;
 $status = "alert-success";
@@ -14,7 +16,6 @@ $relationship=$_REQUEST['relationship'];
 $reminder=$_REQUEST['reminder'];
 
 if ((trim($name) == '') || (trim($description) == '') || (trim($dob) == '') || (trim($relationship) == '') || (trim($reminder) == '')) {
-
     $alert = true;
     $mainMessage = "Warning !";
     $status = "alert-warning";
@@ -34,13 +35,27 @@ require('./database/connection.php');
 // insert query
 $insertQuery="INSERT INTO `wishes` (`userId`,`description`, `dob`, `relation`, `reminder`) VALUES ($activeUserId,'$description', '$dob', '$relationship', '$reminder')";
 $res=mysqli_query($connection,$insertQuery);
+// on success
+if($res){
+    $alert = true;
+    $mainMessage = "Success !";
+    $status = "alert-success";
+    $message = "Birthday successfully marked in calender";
+    header('Location: /birthdayTracker/');
 
-//     // check whether user already registered or not 
-//     require('./database/connection.php');
-//     $resultGet = mysqli_query($connection,"SELECT * FROM users where email='$email'");
-//     $rows = mysqli_num_rows($resultGet);
+}
+// on error
+else{
 
-// mysqli_close($connection);
+    $alert = true;
+    $mainMessage = "Error !";
+    $status = "alert-error";
+    $message = "Sorry Something went wrong ,Please Try again";
+
+}
+    
+
+mysqli_close($connection);
 
 
 
@@ -142,7 +157,7 @@ $res=mysqli_query($connection,$insertQuery);
             </div>
             <div class="form-group">
                 <label for="date">Birthday Date:</label>
-                <input type="date" id="date" name="dob" required>
+                <input type="date" id="date" name="dob" min="1920-01-01"  max="<?php echo date("Y-m-d"); ?>" required>
             </div>
 
 
@@ -170,17 +185,28 @@ $res=mysqli_query($connection,$insertQuery);
 
             <div class="form-group">
                 <label for="reminder">Reminder Date Every Year:</label>
-                <input type="datetime-local" id="reminder" name="reminder" required>
+                <input type="datetime-local" id="reminder" name="reminder"
+                min="1920-01-01T12:00"
+      max="<?php echo date("Y-m-d"); ?>T<?php date_default_timezone_set('Asia/Kolkata'); echo date('h:i:s a', time());?>"
+                required
+              
+                >
+               
             </div>
-
             <input type="submit" value="submit">
         </form>
     </div>
 
 
-
     <?php require('./components/BootstrapJavascript.php'); ?>
 
+<!-- prevent page from re-submit data on page refresh -->
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+   
 </body>
 
 </html>
