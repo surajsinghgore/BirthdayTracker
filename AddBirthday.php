@@ -33,7 +33,7 @@ $activeUserId = $_SESSION['activeUserId'];
 // established connection
 require('./database/connection.php');
 // insert query
-$insertQuery="INSERT INTO `wishes` (`userId`,`description`, `dob`, `relation`, `reminder`) VALUES ($activeUserId,'$description', '$dob', '$relationship', '$reminder')";
+$insertQuery="INSERT INTO `wishes` (`userId`,`name`,`description`, `dob`, `relation`, `reminder`) VALUES ($activeUserId,'$name','$description', '$dob', '$relationship', '$reminder')";
 $res=mysqli_query($connection,$insertQuery);
 // on success
 if($res){
