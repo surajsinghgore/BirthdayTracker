@@ -2,12 +2,13 @@
 <html lang="en">
 <?php require('./components/HeadTag.php');?>
 <body>
-    
-
 <!-- require header -->
 <?php require('./layout/Header.php');?>
 <!-- middleware require -->
 <?php require('./middleware/verifyLogin.php'); ?>
+
+<!-- user birthday list -->
+<?php require('./layout/HomeCard.php');?>
 
 
 <!-- bootstrap js  -->
